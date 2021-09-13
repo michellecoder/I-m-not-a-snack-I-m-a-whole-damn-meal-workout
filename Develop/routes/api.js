@@ -70,5 +70,7 @@ router.get("api/workouts", (req, res) => {
 
 
 
-    module.exports = route
+
 });
+
+module.exports = route;
