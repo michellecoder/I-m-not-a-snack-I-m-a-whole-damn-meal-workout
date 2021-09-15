@@ -17,7 +17,7 @@ router.put("/workouts/:id", ({
     body,
     params
 }, res) => {
-    Workout.findByIdAndUpdate({ $push: { exercise: body } }, { new: true, runValidatetors: true })
+    Workout.findByIdAndUpdate({ $push: { exercise: {...body } } }, { new: true, runValidatetors: true })
         .then(dbworkout => {
             res.json(dbworkout);
         }).catch(err => { res.status(400).json(err) });
@@ -40,7 +40,7 @@ router.get("/workouts/range", (req, res) => {
     Workout.aggregate([
             { $addFields: { totalDuration: { $sum: "$exercises.duration" } } }
         ])
-        .sort({ id: -1 })
+        .sort({ day: -1 })
         .limit(7)
 
     .then(dbWorkouts => {
