@@ -1,7 +1,8 @@
+// URL Routes localhost:3000/
 const router = require("express").Router();
-// const apiRoutes = require("./apiRoutes");
+const api = require("./apiRoutes");
 const path = require("path");
-// router.use(apiRoutes);
+router.use("/api", api);
 
 // router.get("/", (req, res) => {
 //     res.sendFile(path.join(__dirname, "../public/index.html"));
@@ -10,8 +11,8 @@ const path = require("path");
 router.get("/exercise", (req, res) => {
     res.sendFile(path.join(__dirname, "../public/exercise.html"));
 });
-router.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/status.html"));
+router.get("/stats", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/stats.html"));
 });
 
 
