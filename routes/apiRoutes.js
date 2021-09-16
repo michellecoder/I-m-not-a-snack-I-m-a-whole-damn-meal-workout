@@ -19,7 +19,7 @@ router.put("/workouts/:id", ({
 }, res) => {
     Workout.findByIdAndUpdate({ $push: { exercise: {...body } } }, { new: true, runValidatetors: true })
         .then(dbworkout => {
-            res.json(dbWorkouts);
+            res.json(dbworkout);
         }).catch(err => { res.status(400).json(err) });
 })
 
