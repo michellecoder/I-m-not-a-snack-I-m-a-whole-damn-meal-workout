@@ -9,6 +9,7 @@ router.post("/workouts", ({
 }, res) => {
     Workout.create(body)
         .then(dbworkout => {
+            console.log(dbworkout);
             res.json(dbworkout);
         }).catch(err => { res.status(400).json(err) });
 })
@@ -17,9 +18,11 @@ router.put("/workouts/:id", ({
     body,
     params
 }, res) => {
-    Workout.findByIdAndUpdate({ $push: { exercise: {...body } } }, { new: true, runValidatetors: true })
-        .then(dbworkout => {
-            res.json(dbworkout);
+    console.log(body, params);
+    Workout.findByIdAndUpdate(params.id, { $push: { exercises: {...body } } }, { new: true, runValidators: true })
+        .then(dbWorkouts => {
+            console.log(dbWorkouts);
+            res.json(dbWorkouts);
         }).catch(err => { res.status(400).json(err) });
 })
 
@@ -54,14 +57,6 @@ router.get("/workouts/range", (req, res) => {
 
 });
 
-router.delete("/workouts", ({
-    body
-}, res) => {
-    Workout.findByIdAndDelete(body.id)
-        .then(dbworkout => {
-            res.json(dbworkout);
-        }).catch(err => { res.status(400).json(err) })
-});
 
 
 
